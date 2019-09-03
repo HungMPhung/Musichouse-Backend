@@ -30,6 +30,8 @@ public class Song {
     @JoinColumn
     private User user;
 
+    public Song(){}
+
     public Song(String avatar, String nameSong, String nameSinger, String url, String describe, User user) {
         this.avatar = avatar;
         this.nameSong = nameSong;
