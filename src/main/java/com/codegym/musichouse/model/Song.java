@@ -6,9 +6,12 @@ import javax.validation.constraints.Size;
 
 @Entity
 public class Song {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    private String avatar;
 
     @NotBlank
     @Size(min = 3, max = 60)
@@ -20,23 +23,20 @@ public class Song {
 
     private String url;
 
-    private String avatar;
-
     @Column(columnDefinition = "long")
-    private String description;
+    private String describes;
 
     @ManyToOne
     @JoinColumn
     private User user;
 
-    public Song(){}
-
-    public Song(@NotBlank @Size(min = 3, max = 60) String nameSong, @NotBlank @Size(min = 3, max = 60) String nameSinger, String url, String avatar, String description) {
+    public Song(String avatar, String nameSong, String nameSinger, String url, String describe, User user) {
+        this.avatar = avatar;
         this.nameSong = nameSong;
         this.nameSinger = nameSinger;
         this.url = url;
-        this.avatar = avatar;
-        this.description = description;
+        this.describes = describe;
+        this.user = user;
     }
 
     public Long getId() {
@@ -45,6 +45,14 @@ public class Song {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 
     public String getNameSong() {
@@ -71,19 +79,27 @@ public class Song {
         this.url = url;
     }
 
-    public String getAvatar() {
-        return avatar;
+    public String getDescribe() {
+        return describes;
     }
 
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
+    public void setDescribe(String describe) {
+        this.describes = describe;
     }
 
-    public String getDescription() {
-        return description;
+    public String getDescribes() {
+        return describes;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setDescribes(String describes) {
+        this.describes = describes;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }
