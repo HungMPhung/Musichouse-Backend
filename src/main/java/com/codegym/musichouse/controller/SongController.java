@@ -19,7 +19,7 @@ public class SongController {
     private SongService songService;
 
     @RequestMapping(value = "/songs", method = RequestMethod.GET)
-    public ResponseEntity<ResponseMessage> listAllHouse() {
+    public ResponseEntity<ResponseMessage> listAllSong() {
         List<Song> songs = this.songService.findAll();
 
         if (songs.isEmpty()) {
@@ -29,7 +29,7 @@ public class SongController {
         }
 
         return new ResponseEntity<ResponseMessage>(
-                new ResponseMessage("Successfully. Get list all house",songs),
+                new ResponseMessage("Successfully. Get list all songs",songs),
                 HttpStatus.OK);
     }
 
@@ -44,7 +44,54 @@ public class SongController {
         }
 
         return new ResponseEntity<ResponseMessage>(
-                new ResponseMessage("Successfully. Get detail house",songs),
+                new ResponseMessage("Successfully. Get detail songs",songs),
                 HttpStatus.OK);
     }
+
+    @RequestMapping(value = "/songs/create", method = RequestMethod.POST)
+    public ResponseEntity<ResponseMessage> createSongs(@RequestBody Song songs) {
+        this.songService.createSong(songs);
+
+        if (songs == null) {
+            return new ResponseEntity<ResponseMessage>(
+                    new ResponseMessage("Successfully but not found data", null),
+                    HttpStatus.NOT_FOUND);
+        }
+
+        return new ResponseEntity<ResponseMessage>(
+                new ResponseMessage("Successfully. Create songs", songs),
+                HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/songs/update/{id}", method = RequestMethod.PUT)
+    public ResponseEntity<ResponseMessage> updateSong(@PathVariable Long id,@RequestBody Song songs){
+        this.songService.updateSong(songs);
+
+        if (songs == null) {
+            return new ResponseEntity<ResponseMessage>(
+                    new ResponseMessage("Successfully but not found data", null),
+                    HttpStatus.NOT_FOUND);
+        }
+
+        return new ResponseEntity<ResponseMessage>(
+                new ResponseMessage("Successfully. update songs", songs),
+                HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/songs/delete/{id}", method = RequestMethod.DELETE)
+    public ResponseEntity<ResponseMessage> deleteSong(@PathVariable Long id){
+        this.songService.deleteSong(id);
+
+        if (id == null) {
+            return new ResponseEntity<ResponseMessage>(
+                    new ResponseMessage("Successfully but not found data", null),
+                    HttpStatus.NOT_FOUND);
+        }
+
+        return new ResponseEntity<ResponseMessage>(
+                new ResponseMessage("Successfully. delete songs", id),
+                HttpStatus.OK);
+
+    }
+
 }

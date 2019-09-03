@@ -12,9 +12,9 @@ public interface SongService {
 
     Song findById(Long id);
 
-    void createHouse(Song song);
+    void createSong(Song song);
 
-    void updateHouse(Song song);
+    void updateSong(Song song);
 
-    void deleteHouse(Long id);
+    void deleteSong(Long id);
 }

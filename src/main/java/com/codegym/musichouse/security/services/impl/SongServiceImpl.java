@@ -28,17 +28,17 @@ public class SongServiceImpl implements SongService {
     }
 
     @Override
-    public void createHouse(Song song) {
+    public void createSong(Song song) {
         songRepository.save(song);
     }
 
     @Override
-    public void updateHouse(Song song) {
+    public void updateSong(Song song) {
         songRepository.save(song);
     }
 
     @Override
-    public void deleteHouse(Long id) {
+    public void deleteSong(Long id) {
         songRepository.deleteById(id);
     }
 }
