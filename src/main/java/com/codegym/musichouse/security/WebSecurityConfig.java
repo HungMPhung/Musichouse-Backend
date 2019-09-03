@@ -1,8 +1,11 @@
 package com.codegym.musichouse.security;
 
+import com.codegym.musichouse.repository.SongRepository;
 import com.codegym.musichouse.security.jwt.JwtAuthEntryPoint;
 import com.codegym.musichouse.security.jwt.JwtAuthTokenFilter;
+import com.codegym.musichouse.security.services.SongService;
 import com.codegym.musichouse.security.services.UserDetailsServiceImpl;
+import com.codegym.musichouse.security.services.impl.SongServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -24,11 +27,17 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
         prePostEnabled = true
 )
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+
     @Autowired
     UserDetailsServiceImpl userDetailsService;
 
     @Autowired
     private JwtAuthEntryPoint unauthorizedHandler;
+
+    @Bean
+    public SongService songService(){
+        return new SongServiceImpl();
+    }
 
     @Bean
     public JwtAuthTokenFilter authenticationJwtTokenFilter() {
@@ -57,7 +66,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable().
                 authorizeRequests()
-                .antMatchers("/api/auth/**").permitAll()
+                .antMatchers("/api/auth/**","/api/songs","/api/songs/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
