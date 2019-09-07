@@ -11,7 +11,7 @@ public class Song {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String avatar;
+    private String avatarUrl;
 
     @NotBlank
     @Size(min = 3, max = 60)
@@ -21,7 +21,7 @@ public class Song {
     @Size(min = 3, max = 60)
     private String nameSinger;
 
-    private String url;
+    private String mp3Url;
 
     @Column(columnDefinition = "long")
     private String describes;
@@ -32,11 +32,11 @@ public class Song {
 
     public Song(){}
 
-    public Song(String avatar, String nameSong, String nameSinger, String url, String describe, User user) {
-        this.avatar = avatar;
+    public Song(String avatarUrl, String nameSong, String nameSinger, String mp3Url, String describe, User user) {
+        this.avatarUrl = avatarUrl;
         this.nameSong = nameSong;
         this.nameSinger = nameSinger;
-        this.url = url;
+        this.mp3Url = mp3Url;
         this.describes = describe;
         this.user = user;
     }
@@ -47,14 +47,6 @@ public class Song {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getAvatar() {
-        return avatar;
-    }
-
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
     }
 
     public String getNameSong() {
@@ -71,14 +63,6 @@ public class Song {
 
     public void setNameSinger(String nameSinger) {
         this.nameSinger = nameSinger;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
     }
 
     public String getDescribe() {
@@ -103,5 +87,21 @@ public class Song {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public String getAvatarUrl() {
+        return avatarUrl;
+    }
+
+    public void setAvatarUrl(String avatarUrl) {
+        this.avatarUrl = avatarUrl;
+    }
+
+    public String getMp3Url() {
+        return mp3Url;
+    }
+
+    public void setMp3Url(String mp3Url) {
+        this.mp3Url = mp3Url;
     }
 }

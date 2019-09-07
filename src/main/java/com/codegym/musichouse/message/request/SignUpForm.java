@@ -9,6 +9,8 @@ public class SignUpForm {
     @Size(min = 3, max = 50)
     private String name;
 
+    private String avatarUrl;
+
     @NotBlank
     @Size(min = 3, max = 50)
     private String username;
@@ -23,6 +25,8 @@ public class SignUpForm {
     @NotBlank
     @Size(min = 6, max = 12)
     private String password;
+
+    public SignUpForm(){}
 
     public String getName() {
         return name;
@@ -62,6 +66,14 @@ public class SignUpForm {
 
     public void setRole(Set<String> role) {
         this.role = role;
+    }
+
+    public String getAvatarUrl() {
+        return avatarUrl;
+    }
+
+    public void setAvatarUrl(String avatarUrl) {
+        this.avatarUrl = avatarUrl;
     }
 }
 

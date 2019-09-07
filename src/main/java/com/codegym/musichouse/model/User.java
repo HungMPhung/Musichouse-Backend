@@ -32,6 +32,8 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String avatarUrl;
+
     @NotBlank
     @Size(min = 3, max = 50)
     private String name;
@@ -56,14 +58,16 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
-    public User() {
+    public User(String signUpRequestName, String name, String username, String email, String encode) {
     }
 
-    public User(String name, String username, String email, String password) {
+    public User(String avatarUrl, @NotBlank @Size(min = 3, max = 50) String name, @NotBlank @Size(min = 3, max = 50) String username, @NotBlank @Size(max = 50) @Email String email, @NotBlank @Size(min = 6, max = 100) String password, Set<Role> roles) {
+        this.avatarUrl = avatarUrl;
         this.name = name;
         this.username = username;
         this.email = email;
         this.password = password;
+        this.roles = roles;
     }
 
     public Long getId() {
@@ -112,5 +116,13 @@ public class User {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+    public String getAvatarUrl() {
+        return avatarUrl;
+    }
+
+    public void setAvatarUrl(String avatarUrl) {
+        this.avatarUrl = avatarUrl;
     }
 }
