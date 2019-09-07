@@ -8,6 +8,8 @@ import com.codegym.musichouse.security.services.SongService;
 import com.codegym.musichouse.security.services.UserDetailsServiceImpl;
 import com.codegym.musichouse.security.services.impl.PlaylistServiceImpl;
 import com.codegym.musichouse.security.services.impl.SongServiceImpl;
+import com.codegym.musichouse.service.CategoryService;
+import com.codegym.musichouse.service.Impl.CategoryServiceImpl;
 import com.codegym.musichouse.service.Impl.UserServiceImpl;
 import com.codegym.musichouse.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,6 +54,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public UserService userService() {
         return new UserServiceImpl();
+    }
+
+    @Bean
+    CategoryService categoryService() {
+        return new CategoryServiceImpl();
     }
 
     @Bean
