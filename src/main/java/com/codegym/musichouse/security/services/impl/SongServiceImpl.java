@@ -6,6 +6,7 @@ import com.codegym.musichouse.security.services.SongService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
+import java.util.Optional;
 
 public class SongServiceImpl implements SongService {
 
@@ -23,8 +24,8 @@ public class SongServiceImpl implements SongService {
     }
 
     @Override
-    public Song findById(Long id) {
-        return songRepository.findById(id).get();
+    public Optional<Song> findById(Long id) {
+        return songRepository.findById(id);
     }
 
     @Override

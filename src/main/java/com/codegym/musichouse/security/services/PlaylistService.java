@@ -4,16 +4,21 @@ import com.codegym.musichouse.model.Playlist;
 import com.codegym.musichouse.model.Song;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface PlaylistService {
 
     List<Playlist> findAll();
 
-    Playlist findById(Long id);
+    Optional<Playlist> findById(Long id);
 
-    void createPlaylist(Playlist playlist);
+    Playlist findByIdPlaylist(Long id);
 
-    void updatePlaylist(Playlist playlist);
+    void save(Playlist playlist);
 
-    void deletePlaylist(Long id);
+    void delete(Long id);
+
+    Optional<Playlist> findAllByPlaylistNameContaining(String playlist_name);
+
+    Optional<Playlist> findAllByUserUsername(String user_name);
 }

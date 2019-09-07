@@ -3,6 +3,7 @@ package com.codegym.musichouse.security.services;
 import com.codegym.musichouse.model.Song;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface SongService {
 
@@ -10,7 +11,7 @@ public interface SongService {
 
     List<Song> findByUserId(long userId);
 
-    Song findById(Long id);
+    Optional<Song> findById(Long id);
 
     void createSong(Song song);
 
