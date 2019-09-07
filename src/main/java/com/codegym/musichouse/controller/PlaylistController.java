@@ -1,5 +1,7 @@
 package com.codegym.musichouse.controller;
 
+import com.codegym.musichouse.message.request.CreatePlaylistForm;
+import com.codegym.musichouse.message.request.UpdatePlaylistForm;
 import com.codegym.musichouse.message.respond.ResponseMessage;
 import com.codegym.musichouse.model.Playlist;
 import com.codegym.musichouse.security.services.PlaylistService;
@@ -8,43 +10,55 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @CrossOrigin("*")
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/playlist")
 public class PlaylistController {
 
     @Autowired
     private PlaylistService playlistService;
 
-    @RequestMapping(value = "/playlist", method = RequestMethod.GET)
-    public ResponseEntity<ResponseMessage> listAllPlaylist() {
-        List<Playlist> playlists = this.playlistService.findAll();
-
-        if (playlists.isEmpty()){
-           return new ResponseEntity<ResponseMessage>(
-                   new ResponseMessage("Successfully but not found data",null),
-                   HttpStatus.NOT_FOUND);
-        }
-
-        return new ResponseEntity<ResponseMessage>(
-                new ResponseMessage("Successfully. Get list all Playlist",null),
-                HttpStatus.OK);
+    @PostMapping("/create")
+    public ResponseEntity<?> createPlaylist(@Valid @RequestBody CreatePlaylistForm createPlaylistForm) {
+        Playlist playlist = new Playlist(
+                createPlaylistForm.getNamePlaylist(),
+                createPlaylistForm.getUser(),
+                createPlaylistForm.getSongs()
+                );
+        playlistService.save(playlist);
+        return new ResponseEntity<>(new ResponseMessage("Create playlist successfully!"), HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/playlist/{id}", method = RequestMethod.GET)
-    public ResponseEntity<ResponseMessage> getPlaylist(@PathVariable Long id) {
-        Playlist playlist = this.playlistService.findById(id);
+    @GetMapping()
+    public ResponseEntity<?> getAllPlaylist() {
+        List<Playlist> playlists = playlistService.findAll();
+        return new ResponseEntity<>(playlists, HttpStatus.OK);
 
-        if (playlist == null){
-            return new ResponseEntity<ResponseMessage>(
-                    new ResponseMessage("Successfully but not found data",null),
-                    HttpStatus.NOT_FOUND);
-        }
+    }
 
-        return new ResponseEntity<ResponseMessage>(
-                new ResponseMessage("Successfully. Get detail playlist",null),
-                HttpStatus.OK);
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getPlaylist(@PathVariable("id") Long id) {
+        Optional<Playlist> playlist = playlistService.findById(id);
+        return new ResponseEntity<>(playlist, HttpStatus.OK);
+    }
+
+    @PutMapping("/update/{id}")
+    public ResponseEntity<?> updatePlaylist(@Valid @RequestBody UpdatePlaylistForm updatePlaylistForm, @PathVariable("id") Long id) {
+        Playlist playlist = playlistService.findByIdPlaylist(id);
+        playlist.setPlaylistName(updatePlaylistForm.getNamePlaylist());
+        playlist.setSongs(updatePlaylistForm.getSongs());
+        playlist.setUser(updatePlaylistForm.getUser());
+        playlistService.save(playlist);
+        return new ResponseEntity<>(playlist, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deletePlaylist(@PathVariable("id") Long id) {
+        playlistService.delete(id);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

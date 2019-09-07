@@ -19,27 +19,17 @@ public class SongServiceImpl implements SongService {
     }
 
     @Override
-    public List<Song> findByUserId(long userId) {
-        return songRepository.findByUserId(userId);
-    }
-
-    @Override
-    public Optional<Song> findById(Long id) {
+    public Optional<Song> findById(long id) {
         return songRepository.findById(id);
     }
 
     @Override
-    public void createSong(Song song) {
-        songRepository.save(song);
+    public Song save(Song song) {
+        return songRepository.save(song);
     }
 
     @Override
-    public void updateSong(Song song) {
-        songRepository.save(song);
-    }
-
-    @Override
-    public void deleteSong(Long id) {
+    public void delete(long id) {
         songRepository.deleteById(id);
     }
 }

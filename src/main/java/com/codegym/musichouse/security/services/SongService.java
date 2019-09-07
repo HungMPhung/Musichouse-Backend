@@ -9,13 +9,9 @@ public interface SongService {
 
     List<Song> findAll();
 
-    List<Song> findByUserId(long userId);
+    Optional<Song> findById(long id);
 
-    Optional<Song> findById(Long id);
+    Song save(Song song);
 
-    void createSong(Song song);
-
-    void updateSong(Song song);
-
-    void deleteSong(Long id);
+    void delete(long id);
 }

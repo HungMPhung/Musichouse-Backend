@@ -11,7 +11,6 @@ public class Song {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String avatarUrl;
 
     @NotBlank
     @Size(min = 3, max = 60)
@@ -19,26 +18,31 @@ public class Song {
 
     @NotBlank
     @Size(min = 3, max = 60)
-    private String nameSinger;
+    private String singer;
 
+    @Lob
+    @Column(name = "lyrics", length = 51200)
+    private String lyrics;
+    private int likeSong;
+    private int listenSong;
+    private String avatarUrl;
     private String mp3Url;
 
     @Column(columnDefinition = "long")
     private String describes;
 
-    @ManyToOne
-    @JoinColumn
-    private User user;
 
-    public Song(){}
+    public Song(String nameSong, String singer, String category, String lyrics, String avatarUrl, String mp3Url, int likeSong, int listenSong){}
 
-    public Song(String avatarUrl, String nameSong, String nameSinger, String mp3Url, String describe, User user) {
-        this.avatarUrl = avatarUrl;
+    public Song(@NotBlank @Size(min = 3, max = 60) String nameSong, @NotBlank @Size(min = 3, max = 60) String singer, String lyrics, int likeSong, int listenSong, String avatarUrl, String mp3Url, String describes) {
         this.nameSong = nameSong;
-        this.nameSinger = nameSinger;
+        this.singer = singer;
+        this.lyrics = lyrics;
+        this.likeSong = likeSong;
+        this.listenSong = listenSong;
+        this.avatarUrl = avatarUrl;
         this.mp3Url = mp3Url;
-        this.describes = describe;
-        this.user = user;
+        this.describes = describes;
     }
 
     public Long getId() {
@@ -57,12 +61,12 @@ public class Song {
         this.nameSong = nameSong;
     }
 
-    public String getNameSinger() {
-        return nameSinger;
+    public String getSinger() {
+        return singer;
     }
 
-    public void setNameSinger(String nameSinger) {
-        this.nameSinger = nameSinger;
+    public void setSinger(String singer) {
+        this.singer = singer;
     }
 
     public String getDescribe() {
@@ -81,12 +85,28 @@ public class Song {
         this.describes = describes;
     }
 
-    public User getUser() {
-        return user;
+    public String getLyrics() {
+        return lyrics;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setLyrics(String lyrics) {
+        this.lyrics = lyrics;
+    }
+
+    public int getLikeSong() {
+        return likeSong;
+    }
+
+    public void setLikeSong(int likeSong) {
+        this.likeSong = likeSong;
+    }
+
+    public int getListenSong() {
+        return listenSong;
+    }
+
+    public void setListenSong(int listenSong) {
+        this.listenSong = listenSong;
     }
 
     public String getAvatarUrl() {

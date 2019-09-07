@@ -12,8 +12,7 @@ public class Playlist {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
-    @Size(min = 3, max = 60)
+
     private String playlistName;
 
     @ManyToOne
@@ -26,11 +25,15 @@ public class Playlist {
             inverseJoinColumns = @JoinColumn(name = "song_id"))
     private List<Song> songs;
 
-    public Playlist(@NotBlank @Size(min = 3, max = 60) String playlistName, User user, List<Song> songs) {
+    public Playlist(String playlistName, User user, List<Song> songs) {
         this.playlistName = playlistName;
         this.user = user;
         this.songs = songs;
     }
+
+    public Playlist(){}
+
+
 
     public Long getId() {
         return id;
