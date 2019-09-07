@@ -8,6 +8,8 @@ import com.codegym.musichouse.security.services.SongService;
 import com.codegym.musichouse.security.services.UserDetailsServiceImpl;
 import com.codegym.musichouse.security.services.impl.PlaylistServiceImpl;
 import com.codegym.musichouse.security.services.impl.SongServiceImpl;
+import com.codegym.musichouse.service.Impl.UserServiceImpl;
+import com.codegym.musichouse.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -48,6 +50,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
+    public UserService userService() {
+        return new UserServiceImpl();
+    }
+
+    @Bean
     public JwtAuthTokenFilter authenticationJwtTokenFilter() {
         return new JwtAuthTokenFilter();
     }
@@ -72,10 +79,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.cors().and().csrf().disable().
-                authorizeRequests()
-                .antMatchers("/api/auth/**","/api/songs","/api/songs/**","/api/playlist","/api/playlist/**").permitAll()
-                .antMatchers(HttpMethod.OPTIONS,"/**").permitAll()
+        http.cors().and().csrf().disable()
+                .authorizeRequests()
+                .antMatchers("/api/auth/**").permitAll()
+                .antMatchers("/api/songs/**").permitAll()
+                .antMatchers("/api/category/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()

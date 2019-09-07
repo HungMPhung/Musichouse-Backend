@@ -5,7 +5,7 @@ public class ResponseMessage {
 
     private Object data;
 
-    public ResponseMessage(){}
+    public ResponseMessage(String message){}
 
     public ResponseMessage(String message, Object data) {
         this.message = message;
