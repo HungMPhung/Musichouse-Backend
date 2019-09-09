@@ -2,10 +2,12 @@ package com.codegym.musichouse.security.services;
 
 import com.codegym.musichouse.model.Playlist;
 import com.codegym.musichouse.model.Song;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public interface PlaylistService {
 
     List<Playlist> findAll();

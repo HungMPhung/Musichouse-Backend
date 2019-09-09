@@ -5,10 +5,12 @@ import com.codegym.musichouse.model.Song;
 import com.codegym.musichouse.repository.PlaylistRepository;
 import com.codegym.musichouse.security.services.PlaylistService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class PlaylistServiceImpl implements PlaylistService {
 
     @Autowired

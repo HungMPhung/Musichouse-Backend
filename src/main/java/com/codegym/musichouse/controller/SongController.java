@@ -31,7 +31,8 @@ public class SongController {
                 songRequest.getAvatarUrl(),
                 songRequest.getMp3Url(),
                 songRequest.getLikeSong(),
-                songRequest.getListenSong()
+                songRequest.getListenSong(),
+                songRequest.getDescribes()
 
         );
         songService.save(song);

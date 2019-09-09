@@ -12,13 +12,11 @@ public class Song {
     private Long id;
 
 
-    @NotBlank
-    @Size(min = 3, max = 60)
     private String nameSong;
 
-    @NotBlank
-    @Size(min = 3, max = 60)
     private String singer;
+
+    private String category;
 
     @Lob
     @Column(name = "lyrics", length = 51200)
@@ -32,11 +30,10 @@ public class Song {
     private String describes;
 
 
-    public Song(String nameSong, String singer, String category, String lyrics, String avatarUrl, String mp3Url, int likeSong, int listenSong){}
-
-    public Song(@NotBlank @Size(min = 3, max = 60) String nameSong, @NotBlank @Size(min = 3, max = 60) String singer, String lyrics, int likeSong, int listenSong, String avatarUrl, String mp3Url, String describes) {
+    public Song(String nameSong, String singer, String category, String lyrics, int likeSong, int listenSong, String avatarUrl, String mp3Url, String describes) {
         this.nameSong = nameSong;
         this.singer = singer;
+        this.category = category;
         this.lyrics = lyrics;
         this.likeSong = likeSong;
         this.listenSong = listenSong;
@@ -44,6 +41,23 @@ public class Song {
         this.mp3Url = mp3Url;
         this.describes = describes;
     }
+
+    public Song() {
+
+    }
+
+    public Song(String nameSong, String singer, String category, String lyrics, String avatarUrl, String mp3Url, int likeSong, int listenSong, String describes) {
+        this.nameSong = nameSong;
+        this.singer = singer;
+        this.category = category;
+        this.lyrics = lyrics;
+        this.likeSong = likeSong;
+        this.listenSong = listenSong;
+        this.avatarUrl = avatarUrl;
+        this.mp3Url = mp3Url;
+        this.describes = describes;
+    }
+
 
     public Long getId() {
         return id;
@@ -123,5 +137,13 @@ public class Song {
 
     public void setMp3Url(String mp3Url) {
         this.mp3Url = mp3Url;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 }

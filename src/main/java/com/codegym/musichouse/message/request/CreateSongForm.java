@@ -10,20 +10,25 @@ public class CreateSongForm {
     private String mp3Url;
     private int likeSong;
     private int listenSong;
+    private String describes;
 
-    public CreateSongForm() {
-    }
 
-    public CreateSongForm(String nameSong, String singer, String category, String lyrics, String avatarUrl, String mp3Url, int likeSong, int listenSong) {
-        this.nameSong = nameSong;
-        this.singer = singer;
-        this.category = category;
-        this.lyrics = lyrics;
-        this.avatarUrl = avatarUrl;
-        this.mp3Url = mp3Url;
-        this.likeSong = likeSong;
-        this.listenSong = listenSong;
-    }
+//    public CreateSongForm() {
+//    }
+//
+    
+
+//    public CreateSongForm(String describes,String nameSong, String singer, String category, String lyrics, String avatarUrl, String mp3Url, int likeSong, int listenSong) {
+//        this.nameSong = nameSong;
+//        this.singer = singer;
+//        this.category = category;
+//        this.lyrics = lyrics;
+//        this.avatarUrl = avatarUrl;
+//        this.mp3Url = mp3Url;
+//        this.likeSong = likeSong;
+//        this.listenSong = listenSong;
+//        this.describes = describes;
+//    }
 
     public String getNameSong() {
         return nameSong;
@@ -87,5 +92,13 @@ public class CreateSongForm {
 
     public void setListenSong(int listenSong) {
         this.listenSong = listenSong;
+    }
+
+    public String getDescribes() {
+        return describes;
+    }
+
+    public void setDescribes(String describes) {
+        this.describes = describes;
     }
 }

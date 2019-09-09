@@ -4,9 +4,11 @@ import com.codegym.musichouse.model.User;
 import com.codegym.musichouse.repository.UserRepository;
 import com.codegym.musichouse.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+@Service
 public class UserServiceImpl implements UserService {
 
     @Autowired
