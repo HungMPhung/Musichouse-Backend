@@ -23,14 +23,14 @@ public class PlaylistController {
     private PlaylistService playlistService;
 
     @PostMapping("/create")
-    public ResponseEntity<?> createPlaylist(@Valid @RequestBody CreatePlaylistForm createPlaylistForm) {
-        Playlist playlist = new Playlist(
-                createPlaylistForm.getNamePlaylist(),
-                createPlaylistForm.getUser(),
-                createPlaylistForm.getSongs()
-                );
-        playlistService.save(playlist);
-        return new ResponseEntity<>(new ResponseMessage("Create playlist successfully!"), HttpStatus.OK);
+    public ResponseEntity<ResponseMessage> createPlaylist(@Valid @RequestBody Playlist createPlaylistForm) {
+//        Playlist playlist = new Playlist(
+//                createPlaylistForm.getPlaylistName(),
+//                createPlaylistForm.getUser(),
+//                createPlaylistForm.getSongs()
+//                );
+        playlistService.save(createPlaylistForm);
+        return new ResponseEntity<ResponseMessage>(new ResponseMessage("Create playlist successfully!", null), HttpStatus.OK);
     }
 
     @GetMapping()

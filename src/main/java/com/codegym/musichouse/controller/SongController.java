@@ -22,21 +22,21 @@ public class SongController {
     private SongService songService;
 
     @PostMapping("/create")
-    public ResponseEntity<?> createSong(@Valid @RequestBody CreateSongForm songRequest) {
-        Song song = new Song(
-                songRequest.getNameSong(),
-                songRequest.getSinger(),
-                songRequest.getCategory(),
-                songRequest.getLyrics(),
-                songRequest.getAvatarUrl(),
-                songRequest.getMp3Url(),
-                songRequest.getLikeSong(),
-                songRequest.getListenSong(),
-                songRequest.getDescribes()
-
-        );
-        songService.save(song);
-        return new ResponseEntity<>(new ResponseMessage("Create Song successfully!"), HttpStatus.OK);
+    public ResponseEntity<?> createSong(@Valid @RequestBody Song songRequest) {
+//        Song song = new Song(
+//                songRequest.getNameSong(),
+//                songRequest.getSinger(),
+//                songRequest.getCategory(),
+//                songRequest.getLyrics(),
+//                songRequest.getAvatarUrl(),
+//                songRequest.getMp3Url(),
+//                songRequest.getLikeSong(),
+//                songRequest.getListenSong(),
+//                songRequest.getDescribes()
+//
+//        );
+        songService.save(songRequest);
+        return new ResponseEntity<>(new ResponseMessage("Create Song successfully!",null), HttpStatus.OK);
     }
 
     @RequestMapping(method = RequestMethod.GET)

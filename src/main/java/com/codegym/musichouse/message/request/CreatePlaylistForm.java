@@ -17,11 +17,11 @@ public class CreatePlaylistForm {
     }
 
 
-    public CreatePlaylistForm(String namePlaylist, List<Song> songs, User user) {
-        this.namePlaylist = namePlaylist;
-        this.songs = songs;
-        this.user = user;
-    }
+//    public CreatePlaylistForm(String namePlaylist, List<Song> songs, User user) {
+//        this.namePlaylist = namePlaylist;
+//        this.songs = songs;
+//        this.user = user;
+//    }
 
     public String getNamePlaylist() {
         return namePlaylist;

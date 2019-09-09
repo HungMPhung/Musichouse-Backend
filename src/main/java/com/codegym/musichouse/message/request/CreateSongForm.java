@@ -13,9 +13,9 @@ public class CreateSongForm {
     private String describes;
 
 
-//    public CreateSongForm() {
-//    }
-//
+    public CreateSongForm() {
+    }
+
     
 
 //    public CreateSongForm(String describes,String nameSong, String singer, String category, String lyrics, String avatarUrl, String mp3Url, int likeSong, int listenSong) {
