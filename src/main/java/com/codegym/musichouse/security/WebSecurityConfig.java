@@ -1,19 +1,11 @@
 package com.codegym.musichouse.security;
 
-import com.codegym.musichouse.repository.SongRepository;
 import com.codegym.musichouse.security.jwt.JwtAuthEntryPoint;
 import com.codegym.musichouse.security.jwt.JwtAuthTokenFilter;
-import com.codegym.musichouse.security.services.PlaylistService;
-import com.codegym.musichouse.security.services.SongService;
 import com.codegym.musichouse.security.services.UserDetailsServiceImpl;
-import com.codegym.musichouse.security.services.impl.PlaylistServiceImpl;
-import com.codegym.musichouse.security.services.impl.SongServiceImpl;
-import com.codegym.musichouse.service.Impl.UserServiceImpl;
-import com.codegym.musichouse.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;

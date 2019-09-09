@@ -1,4 +1,4 @@
-package com.codegym.musichouse.security.services;
+package com.codegym.musichouse.service;
 
 import com.codegym.musichouse.model.Song;
 import org.springframework.stereotype.Service;

@@ -1,10 +1,9 @@
 package com.codegym.musichouse.controller;
 
-import com.codegym.musichouse.message.request.CreatePlaylistForm;
 import com.codegym.musichouse.message.request.UpdatePlaylistForm;
 import com.codegym.musichouse.message.respond.ResponseMessage;
 import com.codegym.musichouse.model.Playlist;
-import com.codegym.musichouse.security.services.PlaylistService;
+import com.codegym.musichouse.service.PlaylistService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

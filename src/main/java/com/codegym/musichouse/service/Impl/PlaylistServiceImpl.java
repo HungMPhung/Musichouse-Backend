@@ -1,9 +1,8 @@
-package com.codegym.musichouse.security.services.impl;
+package com.codegym.musichouse.service.Impl;
 
 import com.codegym.musichouse.model.Playlist;
-import com.codegym.musichouse.model.Song;
 import com.codegym.musichouse.repository.PlaylistRepository;
-import com.codegym.musichouse.security.services.PlaylistService;
+import com.codegym.musichouse.service.PlaylistService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
