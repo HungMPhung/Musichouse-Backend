@@ -60,9 +60,14 @@ public class User {
     private Set<Role> roles = new HashSet<>();
 
     public User(String signUpRequestName, String name, String username, String email, String encode) {
+        this.name = signUpRequestName;
+        this.username = username;
+        this.email = email;
+        this.password = encode;
+        this.avatarUrl = name;
     }
 
-    public User(String avatarUrl, @NotBlank @Size(min = 3, max = 50) String name, @NotBlank @Size(min = 3, max = 50) String username, @NotBlank @Size(max = 50) @Email String email, @NotBlank @Size(min = 6, max = 100) String password, Set<Role> roles) {
+    public User( String avatarUrl, @NotBlank @Size(min = 3, max = 50) String name, @NotBlank @Size(min = 3, max = 50) String username, @NotBlank @Size(max = 50) @Email String email, @NotBlank @Size(min = 6, max = 100) String password, Set<Role> roles) {
         this.avatarUrl = avatarUrl;
         this.name = name;
         this.username = username;
@@ -70,6 +75,8 @@ public class User {
         this.password = password;
         this.roles = roles;
     }
+
+    public User(){}
 
     public Long getId() {
         return id;
