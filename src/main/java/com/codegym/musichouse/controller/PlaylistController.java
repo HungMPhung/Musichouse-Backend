@@ -3,11 +3,14 @@ package com.codegym.musichouse.controller;
 import com.codegym.musichouse.message.request.UpdatePlaylistForm;
 import com.codegym.musichouse.message.respond.ResponseMessage;
 import com.codegym.musichouse.model.Playlist;
+import com.codegym.musichouse.security.services.UserPrinciple;
 import com.codegym.musichouse.service.PlaylistService;
+import com.codegym.musichouse.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -22,13 +25,16 @@ public class PlaylistController {
     @Autowired
     private PlaylistService playlistService;
 
+    @Autowired
+    private UserService userService;
+
+    private UserPrinciple getCurrentUser(){
+        return (UserPrinciple) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    }
+
     @PostMapping("/create")
     public ResponseEntity<ResponseMessage> createPlaylist(@Valid @RequestBody Playlist playlist) {
-//        Playlist playlist = new Playlist(
-//                createPlaylistForm.getPlaylistName(),
-//                createPlaylistForm.getUser(),
-//                createPlaylistForm.getSongs()
-//                );
+        playlist.setUser(this.userService.findById(getCurrentUser().getId()));
         playlistService.save(playlist);
         return new ResponseEntity<ResponseMessage>(new ResponseMessage("Create playlist successfully!", null), HttpStatus.OK);
     }
