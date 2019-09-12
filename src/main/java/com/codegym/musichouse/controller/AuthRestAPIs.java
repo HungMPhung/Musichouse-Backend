@@ -27,6 +27,7 @@ import com.codegym.musichouse.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -126,7 +127,16 @@ public class AuthRestAPIs {
     }
 
     @PutMapping("/updateuser")
+//    @PreAuthorize("hasRole('ROLE_USER')")
     public ResponseEntity<?> updatePostUser(HttpServletRequest request, @Valid @RequestBody UpdateForm updateRequest){
+//            User user1 = userService.findById(id);
+//
+//            user1.setAvatarUrl(user.getAvatarUrl());
+//            user1.setEmail(user.getEmail());
+//            user1.setName(user.getName());
+//
+//            userService.save(user1);
+//            return new  ResponseEntity<>(new ResponseMessage("thanh cong",null),HttpStatus.OK);
         String jwt = jwtAuthTokenFilter.getJwt(request);
         String username = jwtProvider.getUserNameFromJwtToken(jwt);
         User user;
