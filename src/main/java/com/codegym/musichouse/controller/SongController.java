@@ -2,11 +2,14 @@ package com.codegym.musichouse.controller;
 
 import com.codegym.musichouse.message.respond.ResponseMessage;
 import com.codegym.musichouse.model.Song;
+import com.codegym.musichouse.security.services.UserPrinciple;
 import com.codegym.musichouse.service.SongService;
+import com.codegym.musichouse.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityNotFoundException;
@@ -22,9 +25,17 @@ public class SongController {
     @Autowired
     private SongService songService;
 
+    @Autowired
+    private UserService userService;
+
+    private UserPrinciple getCurrentUser(){
+        return (UserPrinciple) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    }
+
     @PostMapping("/create")
     @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
     public ResponseEntity<?> createSong(@Valid @RequestBody Song songRequest) {
+        songRequest.setUser(this.userService.findById(getCurrentUser().getId()));
 //        Song song = new Song(
 //                songRequest.getNameSong(),
 //                songRequest.getSinger(),

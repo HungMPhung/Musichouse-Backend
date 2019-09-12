@@ -25,6 +25,7 @@ public class Song {
     @Lob
     @Column(name = "lyrics", length = 51200)
     private String lyrics;
+
     private int likeSong;
     private int listenSong;
     private String avatarUrl;
@@ -34,7 +35,7 @@ public class Song {
     private String describes;
 
 
-    public Song(String nameSong, String singer, String category, String lyrics, int likeSong, int listenSong, String avatarUrl, String mp3Url, String describes) {
+    public Song(User user, String nameSong, String singer, String category, String lyrics, int likeSong, int listenSong, String avatarUrl, String mp3Url, String describes) {
         this.nameSong = nameSong;
         this.singer = singer;
         this.category = category;
@@ -44,23 +45,24 @@ public class Song {
         this.avatarUrl = avatarUrl;
         this.mp3Url = mp3Url;
         this.describes = describes;
+        this.user = user;
     }
 
     public Song() {
 
     }
 
-    public Song(String nameSong, String singer, String category, String lyrics, String avatarUrl, String mp3Url, int likeSong, int listenSong, String describes) {
-        this.nameSong = nameSong;
-        this.singer = singer;
-        this.category = category;
-        this.lyrics = lyrics;
-        this.likeSong = likeSong;
-        this.listenSong = listenSong;
-        this.avatarUrl = avatarUrl;
-        this.mp3Url = mp3Url;
-        this.describes = describes;
-    }
+//    public Song(String nameSong, String singer, String category, String lyrics, String avatarUrl, String mp3Url, int likeSong, int listenSong, String describes) {
+//        this.nameSong = nameSong;
+//        this.singer = singer;
+//        this.category = category;
+//        this.lyrics = lyrics;
+//        this.likeSong = likeSong;
+//        this.listenSong = listenSong;
+//        this.avatarUrl = avatarUrl;
+//        this.mp3Url = mp3Url;
+//        this.describes = describes;
+//    }
 
 
     public Long getId() {
@@ -149,5 +151,13 @@ public class Song {
 
     public void setCategory(String category) {
         this.category = category;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }
