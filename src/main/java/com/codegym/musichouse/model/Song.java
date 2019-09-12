@@ -18,6 +18,10 @@ public class Song {
 
     private String category;
 
+    @ManyToOne
+    @JoinColumn
+    private User user;
+
     @Lob
     @Column(name = "lyrics", length = 51200)
     private String lyrics;
