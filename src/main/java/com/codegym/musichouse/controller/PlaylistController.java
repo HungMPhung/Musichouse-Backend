@@ -7,6 +7,7 @@ import com.codegym.musichouse.service.PlaylistService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -46,6 +47,7 @@ public class PlaylistController {
     }
 
     @PutMapping("/update/{id}")
+    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
     public ResponseEntity<?> updatePlaylist(@Valid @RequestBody UpdatePlaylistForm updatePlaylistForm, @PathVariable("id") Long id) {
         Playlist playlist = playlistService.findByIdPlaylist(id);
         playlist.setPlaylistName(updatePlaylistForm.getNamePlaylist());
@@ -56,6 +58,7 @@ public class PlaylistController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
     public ResponseEntity<?> deletePlaylist(@PathVariable("id") Long id) {
         playlistService.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);

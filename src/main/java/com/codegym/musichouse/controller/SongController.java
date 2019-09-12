@@ -72,7 +72,7 @@ public class SongController {
     }
 
     @PutMapping("update/{id}")
-//    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
     public ResponseEntity<?> updateSong(@RequestBody Song song, @PathVariable("id") Long id){
         Song song1 = songService.findByIdSong(id);
 
