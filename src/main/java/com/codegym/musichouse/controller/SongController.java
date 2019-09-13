@@ -102,6 +102,7 @@ public class SongController {
     }
 
     @GetMapping("/like/{id}")
+    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
     public ResponseEntity<?> getSongLikedById(@PathVariable("id") Long id) {
         try {
             Song song = songService

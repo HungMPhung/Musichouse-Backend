@@ -14,10 +14,7 @@ import com.codegym.musichouse.message.request.SignUpForm;
 import com.codegym.musichouse.message.request.UpdateForm;
 import com.codegym.musichouse.message.respond.JwtResponse;
 import com.codegym.musichouse.message.respond.ResponseMessage;
-import com.codegym.musichouse.model.Role;
-import com.codegym.musichouse.model.RoleName;
-import com.codegym.musichouse.model.Song;
-import com.codegym.musichouse.model.User;
+import com.codegym.musichouse.model.*;
 import com.codegym.musichouse.repository.RoleRepository;
 import com.codegym.musichouse.repository.UserRepository;
 import com.codegym.musichouse.security.jwt.JwtAuthTokenFilter;
@@ -25,6 +22,7 @@ import com.codegym.musichouse.security.jwt.JwtProvider;
 
 import com.codegym.musichouse.security.services.UserDetailsServiceImpl;
 import com.codegym.musichouse.security.services.UserPrinciple;
+import com.codegym.musichouse.service.PlaylistService;
 import com.codegym.musichouse.service.SongService;
 import com.codegym.musichouse.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,6 +68,9 @@ public class AuthRestAPIs {
     SongService songService;
 
     @Autowired
+    PlaylistService playlistService;
+
+    @Autowired
     UserDetailsServiceImpl userDetailsService;
 
     private UserPrinciple getCurrentUser(){
@@ -77,13 +78,25 @@ public class AuthRestAPIs {
     }
 
     @GetMapping("/listSongByUser")
-    public ResponseEntity<ResponseMessage> getListSongById(){
+    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
+    public ResponseEntity<ResponseMessage> getListSongUserById(){
         List<Song> songs = this.songService.findAllByUserId(getCurrentUser().getId());
 
         if(songs == null) {
             return new ResponseEntity<ResponseMessage>(new ResponseMessage("List null", null), HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<ResponseMessage>(new ResponseMessage("Success", songs), HttpStatus.OK);
+    }
+
+    @GetMapping("/playListByUser")
+    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
+    public ResponseEntity<ResponseMessage> getPlayListByUserId(){
+        List<Playlist> playlists = this.playlistService.findAllByUserId(getCurrentUser().getId());
+
+        if(playlists == null) {
+            return new ResponseEntity<ResponseMessage>(new ResponseMessage("List null", null), HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<ResponseMessage>(new ResponseMessage("Success", playlists), HttpStatus.OK);
     }
 
     @PostMapping("/login")

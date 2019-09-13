@@ -16,6 +16,11 @@ public class PlaylistServiceImpl implements PlaylistService {
     private PlaylistRepository playlistRepository;
 
     @Override
+    public List<Playlist> findAllByUserId(Long userId) {
+        return playlistRepository.findAllByUserId(userId);
+    }
+
+    @Override
     public List<Playlist> findAll() {
         return playlistRepository.findAll();
     }
