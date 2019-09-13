@@ -9,7 +9,11 @@ import java.util.Optional;
 @Service
 public interface SongService {
 
-    List<Song> findByUserId (Long userId);
+    List<Song> findAllByOrderByLikeSong();
+
+    List<Song> findAllByOrderByListenSong();
+
+    List<Song> findAllByUserId (Long userId);
 
     List<Song> findAll();
 

@@ -33,6 +33,7 @@ public class PlaylistController {
     }
 
     @PostMapping("/create")
+    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
     public ResponseEntity<ResponseMessage> createPlaylist(@Valid @RequestBody Playlist playlist) {
         playlist.setUser(this.userService.findById(getCurrentUser().getId()));
         playlistService.save(playlist);
@@ -40,6 +41,7 @@ public class PlaylistController {
     }
 
     @GetMapping()
+    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
     public ResponseEntity<?> getAllPlaylist() {
         List<Playlist> playlists = playlistService.findAll();
         return new ResponseEntity<>(playlists, HttpStatus.OK);

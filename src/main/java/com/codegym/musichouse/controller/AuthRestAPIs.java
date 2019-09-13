@@ -1,6 +1,7 @@
 package com.codegym.musichouse.controller;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -15,6 +16,7 @@ import com.codegym.musichouse.message.respond.JwtResponse;
 import com.codegym.musichouse.message.respond.ResponseMessage;
 import com.codegym.musichouse.model.Role;
 import com.codegym.musichouse.model.RoleName;
+import com.codegym.musichouse.model.Song;
 import com.codegym.musichouse.model.User;
 import com.codegym.musichouse.repository.RoleRepository;
 import com.codegym.musichouse.repository.UserRepository;
@@ -23,6 +25,7 @@ import com.codegym.musichouse.security.jwt.JwtProvider;
 
 import com.codegym.musichouse.security.services.UserDetailsServiceImpl;
 import com.codegym.musichouse.security.services.UserPrinciple;
+import com.codegym.musichouse.service.SongService;
 import com.codegym.musichouse.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -64,7 +67,20 @@ public class AuthRestAPIs {
     UserService userService;
 
     @Autowired
+    SongService songService;
+
+    @Autowired
     UserDetailsServiceImpl userDetailsService;
+
+    @GetMapping("/listSong/{userId}")
+    public ResponseEntity<ResponseMessage> getListSongById(@PathVariable Long userId){
+        List<Song> songs = this.songService.findAllByUserId(userId);
+
+        if(songs == null) {
+            return new ResponseEntity<ResponseMessage>(new ResponseMessage("List null", null), HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<ResponseMessage>(new ResponseMessage("Success", songs), HttpStatus.OK);
+    }
 
     @PostMapping("/login")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginForm loginRequest) {

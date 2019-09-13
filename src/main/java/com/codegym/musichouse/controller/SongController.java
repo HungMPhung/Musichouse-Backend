@@ -101,4 +101,30 @@ public class SongController {
         return new ResponseEntity<>(new ResponseMessage("update song successfully!",null), HttpStatus.OK);
     }
 
+    @GetMapping("/like/{id}")
+    public ResponseEntity<?> getSongLikedById(@PathVariable("id") Long id) {
+        try {
+            Song song = songService
+                    .findById(id)
+                    .orElseThrow(EntityNotFoundException::new);
+            song.setLikeSong(song.getLikeSong()+ 1);
+            songService.save(song);
+            return new ResponseEntity<>(song, HttpStatus.OK);
+        } catch (EntityNotFoundException e){
+            return new ResponseEntity<>(new ResponseMessage(e.getMessage()),HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @GetMapping("/toplike")
+    public ResponseEntity<?> topLike() {
+        List<Song> songs = songService.findAllByOrderByLikeSong();
+        return new ResponseEntity<>(songs,HttpStatus.OK);
+    }
+
+    @GetMapping("/toplisten")
+    public ResponseEntity<?> topListen() {
+        List<Song> songs = songService.findAllByOrderByListenSong();
+        return new ResponseEntity<>(songs,HttpStatus.OK);
+    }
+
 }
