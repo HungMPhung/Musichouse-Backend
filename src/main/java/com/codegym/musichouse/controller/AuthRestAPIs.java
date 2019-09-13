@@ -72,9 +72,13 @@ public class AuthRestAPIs {
     @Autowired
     UserDetailsServiceImpl userDetailsService;
 
-    @GetMapping("/listSong/{userId}")
-    public ResponseEntity<ResponseMessage> getListSongById(@PathVariable Long userId){
-        List<Song> songs = this.songService.findAllByUserId(userId);
+    private UserPrinciple getCurrentUser(){
+        return (UserPrinciple) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    }
+
+    @GetMapping("/listSongByUser")
+    public ResponseEntity<ResponseMessage> getListSongById(){
+        List<Song> songs = this.songService.findAllByUserId(getCurrentUser().getId());
 
         if(songs == null) {
             return new ResponseEntity<ResponseMessage>(new ResponseMessage("List null", null), HttpStatus.NOT_FOUND);
