@@ -128,4 +128,10 @@ public class SongController {
         return new ResponseEntity<>(songs,HttpStatus.OK);
     }
 
+    @GetMapping("/search/{nameSong}")
+    public ResponseEntity<?> search(@PathVariable("nameSong") String nameSong){
+        Optional<Song> songs = songService.findByNameSongContaining(nameSong);
+        return new ResponseEntity<>(songs,HttpStatus.OK);
+    }
+
 }

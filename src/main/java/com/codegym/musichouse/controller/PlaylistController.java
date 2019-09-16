@@ -32,6 +32,16 @@ public class PlaylistController {
         return (UserPrinciple) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     }
 
+//    @GetMapping("/")
+
+    @PutMapping("/addSong/{id}")
+    public ResponseEntity<ResponseMessage> addSong(@Valid @RequestBody Playlist playlist, @PathVariable("id") Long id){
+        Playlist playlist1 = playlistService.findByIdPlaylist(id);
+        playlist1.setSongs(playlist.getSongs());
+        playlistService.save(playlist1);
+        return new ResponseEntity<ResponseMessage>(new ResponseMessage("add song successfully",null),HttpStatus.OK);
+    }
+
     @PostMapping("/create")
     @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
     public ResponseEntity<ResponseMessage> createPlaylist(@Valid @RequestBody Playlist playlist) {

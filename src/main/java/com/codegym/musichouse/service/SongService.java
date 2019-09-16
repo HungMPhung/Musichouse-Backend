@@ -24,4 +24,6 @@ public interface SongService {
     Song save(Song song);
 
     void delete(long id);
+
+    Optional<Song> findByNameSongContaining(String song);
 }
