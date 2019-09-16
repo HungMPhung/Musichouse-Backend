@@ -66,9 +66,9 @@ public class PlaylistController {
 
     @PutMapping("/update/{id}")
     @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
-    public ResponseEntity<?> updatePlaylist(@Valid @RequestBody UpdatePlaylistForm updatePlaylistForm, @PathVariable("id") Long id) {
+    public ResponseEntity<?> updatePlaylist(@Valid @RequestBody Playlist updatePlaylistForm, @PathVariable("id") Long id) {
         Playlist playlist = playlistService.findByIdPlaylist(id);
-        playlist.setPlaylistName(updatePlaylistForm.getNamePlaylist());
+        playlist.setPlaylistName(updatePlaylistForm.getPlaylistName());
         playlist.setSongs(updatePlaylistForm.getSongs());
         playlist.setUser(updatePlaylistForm.getUser());
         playlistService.save(playlist);
