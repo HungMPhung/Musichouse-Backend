@@ -23,6 +23,7 @@ import com.codegym.musichouse.security.jwt.JwtProvider;
 import com.codegym.musichouse.security.services.UserDetailsServiceImpl;
 import com.codegym.musichouse.security.services.UserPrinciple;
 import com.codegym.musichouse.service.PlaylistService;
+import com.codegym.musichouse.service.SingerService;
 import com.codegym.musichouse.service.SongService;
 import com.codegym.musichouse.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,6 +72,9 @@ public class AuthRestAPIs {
     PlaylistService playlistService;
 
     @Autowired
+    SingerService singerService;
+
+    @Autowired
     UserDetailsServiceImpl userDetailsService;
 
     private UserPrinciple getCurrentUser(){
@@ -86,6 +90,17 @@ public class AuthRestAPIs {
             return new ResponseEntity<ResponseMessage>(new ResponseMessage("List null", null), HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<ResponseMessage>(new ResponseMessage("Success", songs), HttpStatus.OK);
+    }
+
+    @GetMapping("/listSingerByUser")
+    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
+    public ResponseEntity<ResponseMessage> getListSingerUserById(){
+        List<Singer> singers = this.singerService.findAllByUserId(getCurrentUser().getId());
+
+        if(singers == null) {
+            return new ResponseEntity<ResponseMessage>(new ResponseMessage("List null", null), HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<ResponseMessage>(new ResponseMessage("Success", singers), HttpStatus.OK);
     }
 
     @GetMapping("/playListByUser")

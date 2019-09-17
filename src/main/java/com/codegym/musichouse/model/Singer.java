@@ -15,6 +15,8 @@ public class Singer {
 
     private String information;
 
+    private String singerAvatar;
+
     @OneToMany
     @JoinTable(name = "singers_songs",
             joinColumns = @JoinColumn(name = "singer_id"),
@@ -29,16 +31,25 @@ public class Singer {
 
     public Singer(){}
 
-    public Singer(String nameSinger, String information, List<Song> songs, User user, Date dateUpload) {
+    public Singer(String singerAvatar,String nameSinger, String information, List<Song> songs, User user, Date dateUpload) {
         this.nameSinger = nameSinger;
         this.information = information;
         this.songs = songs;
         this.user = user;
         this.dateUpload = dateUpload;
+        this.singerAvatar = singerAvatar;
     }
 
     public Long getId() {
         return id;
+    }
+
+    public String getSingerAvatar() {
+        return singerAvatar;
+    }
+
+    public void setSingerAvatar(String singerAvatar) {
+        this.singerAvatar = singerAvatar;
     }
 
     public void setId(Long id) {
