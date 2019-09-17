@@ -35,6 +35,7 @@ public class PlaylistController {
 //    @GetMapping("/")
 
     @PutMapping("/addSong/{id}")
+    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
     public ResponseEntity<ResponseMessage> addSong(@Valid @RequestBody Playlist playlist, @PathVariable("id") Long id){
         Playlist playlist1 = playlistService.findByIdPlaylist(id);
         playlist1.setSongs(playlist.getSongs());
