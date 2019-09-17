@@ -49,4 +49,10 @@ public class SingerController {
         Singer singers = singerService.findByIdSinger(id);
         return new ResponseEntity<>(singers,HttpStatus.OK);
     }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<?> deleteSinger(@PathVariable("id") Long id){
+        singerService.delete(id);
+        return new ResponseEntity<>(new ResponseMessage("delete success"),HttpStatus.OK);
+    }
 }
