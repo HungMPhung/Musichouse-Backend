@@ -17,7 +17,7 @@ public class Singer {
 
     private String singerAvatar;
 
-    @OneToMany
+    @ManyToMany
     @JoinTable(name = "singers_songs",
             joinColumns = @JoinColumn(name = "singer_id"),
             inverseJoinColumns = @JoinColumn(name = "song_id"))
