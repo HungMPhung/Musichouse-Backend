@@ -15,6 +15,8 @@ public class Playlist {
 
     private String playlistName;
 
+    private String avatarPlaylist;
+
     @ManyToOne
     @JoinColumn
     private User user;
@@ -25,15 +27,22 @@ public class Playlist {
             inverseJoinColumns = @JoinColumn(name = "song_id"))
     private List<Song> songs;
 
-    public Playlist(String playlistName, User user, List<Song> songs) {
+    public Playlist(String avatarPlaylist, String playlistName, User user, List<Song> songs) {
         this.playlistName = playlistName;
+        this.avatarPlaylist = avatarPlaylist;
         this.user = user;
         this.songs = songs;
     }
 
     public Playlist(){}
 
+    public String getAvatarPlaylist() {
+        return avatarPlaylist;
+    }
 
+    public void setAvatarPlaylist(String avatarPlaylist) {
+        this.avatarPlaylist = avatarPlaylist;
+    }
 
     public Long getId() {
         return id;

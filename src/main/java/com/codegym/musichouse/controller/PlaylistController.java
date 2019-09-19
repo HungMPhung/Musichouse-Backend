@@ -52,7 +52,6 @@ public class PlaylistController {
     }
 
     @GetMapping()
-    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
     public ResponseEntity<?> getAllPlaylist() {
         List<Playlist> playlists = playlistService.findAll();
         return new ResponseEntity<>(playlists, HttpStatus.OK);
